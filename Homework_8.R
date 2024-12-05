@@ -23,7 +23,9 @@ mloa1 <- mloa %>% filter(!is.na(rel_humid)) %>%
                            mloa$min), sep = "", tz = "UTC") %>% 
   mutate(datetimeLocal = with_tz(date_time, tz = "Pacific/Honolulu")) 
   
-  
+# complete cases is a hybrids for certain NA values
+# filter (windspeed < 0 & temp_C_2m > 0 & rel_humid > 0)
+# past eputs the value together 
 
 mloa1 <- mloa %>% filter(!is.na(rel_humid)) %>% 
   filter(!is.na(temp_C_2m)) %>% 
@@ -52,6 +54,10 @@ mloa1 %>% mutate(local_month = month(datetimeLocal, label = TRUE),
 # aesthethics twice becuse you need to decide the details of the design for each part of the plot??
 # why no label = TRUE in local_hour??
 # why is geom_point not running? 
+# why do you group by? 
+# group by lives in this pipe, add mean for that hour... why is this summarize not mutate
+# the data would be long; collapses a value for each hour for each month 
+
 display.brewer.all(colorblindFriendly = TRUE)
 
 tz(mloa1$datetime)
@@ -70,3 +76,13 @@ tz(mloa1$datetime)
 # make that data more readable through label 
 #months <- month(mloa2$datetime, label = TRUE, abbr = TRUE)
 #table(months)
+
+
+# REDO
+# ggplot(data = mloa1, aes(x = month, y = mean_hourly_temp, color = hour_hst)) +
+#geom_point() +
+#  scale_color_distiller(palette = "Oranges")
+
+OR
+#scale_color_gradient2(low = "blue", high = "blue", mid = "white")
+# theme (axis.title.x = element_blank(), axis.ticks = element_blank())
