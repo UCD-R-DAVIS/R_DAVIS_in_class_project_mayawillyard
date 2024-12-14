@@ -34,7 +34,7 @@ ggplot() +
   geom_point(aes(x= minutes_per_mile, y = steps_per_minute)) +
   geom_line(aes(x=minutes_per_mile, y = steps_per_minute)) +
   theme(axis.text.x = element_text (angle = 45,vjust = 1)) +
-  scale_fill_colorblind("pop") +
+  scale_fill_viridis_c() +
   ggtitle("Change in strides in speed by time period") +
   xlab("Speed") +
   ylab("Steps Per Minute") +
